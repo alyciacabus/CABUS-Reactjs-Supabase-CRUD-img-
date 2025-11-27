@@ -12,6 +12,10 @@ interface Task {
 }
 
 export default function App() {
+
+  const tableName = import.meta.env.VITE_TABLE_NAME;   
+  const storageName = import.meta.env.VITE_STORAGE_NAME;  
+
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTask, setNewTask] = useState({ title: "", description: "" });
   const [newDescription, setNewDescription] = useState("");
@@ -35,7 +39,7 @@ export default function App() {
 
       // Upload the file to Supabase Storage
       const { error: uploadError } = await supabase.storage
-        .from("notes-images") // bucket name
+        .from(storageName) // bucket name
         .upload(filePath, file, { upsert: true });
 
       if (uploadError) {
@@ -45,7 +49,7 @@ export default function App() {
 
       // Get the public URL after upload
       const { data } = supabase.storage
-        .from("notes-images")
+        .from(storageName)
         .getPublicUrl(filePath);
 
       if (!data?.publicUrl) {
@@ -84,7 +88,7 @@ export default function App() {
     if (taskImage) imageUrl = await uploadFile(taskImage, "images");
     if (taskVideo) videoUrl = await uploadFile(taskVideo, "videos");
 
-    const { error } = await supabase.from("tasks").insert([
+    const { error } = await supabase.from(tableName).insert([
       {
         title: newTask.title,
         description: newTask.description,
@@ -107,7 +111,7 @@ export default function App() {
   // --- READ TASKS ---
   const fetchTasks = async () => {
     const { data, error } = await supabase
-      .from("tasks")
+      .from(tableName)
       .select("*")
       .order("id", { ascending: false });
 
@@ -118,7 +122,7 @@ export default function App() {
   // --- UPDATE TASK ---
   const updateTask = async (id: number) => {
     const { error } = await supabase
-      .from("tasks")
+      .from(tableName)
       .update({ description: newDescription })
       .eq("id", id);
 
