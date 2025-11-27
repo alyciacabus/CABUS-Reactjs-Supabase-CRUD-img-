@@ -1,0 +1,187 @@
+/* Universal Box Sizing and Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Light Theme and Font */
+body {
+  background-color: #126449; /* Very light grey background */
+  color: #913a3a; /* Dark text for readability */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Main App Container - Wider and with a "card" look */
+/* Main App Container - Wider and with a "card" look */
+.App-Container {
+  width: 100%;
+  max-width: 800%; /* <--- I changed this from 600px */
+  padding: 8rem;
+  margin-top: 50px;
+  background-color: #dbaf1d; 
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgb(241, 226, 138); 
+}
+
+/* Heading Style */
+h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.7rem;
+  font-weight: 700;
+  color: #1a0d0d;
+  letter-spacing: -1px;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 2rem;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #f9f9f9; /* Slightly off-white input bg */
+  color: #333;
+  font-size: 1rem;
+  resize: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Modern focus state */
+input[type="text"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #007aff; /* Blue highlight */
+  box-shadow: 0 0 0 3px rgba(208, 211, 214, 0.1);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #999;
+}
+
+/* Button Styling (Primary Action) */
+button {
+  padding: 12px 15px;
+  border: none;
+  border-radius: 6px;
+  background-color: #ff004c; /* Primary blue */
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  position: center;
+}
+
+button:hover {
+  background-color: #05360f; /* Darker blue on hover */
+}
+
+/* Task List */
+ul {
+  list-style: none;
+  width: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Task Item (Card) Styling */
+li {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e0e0e0;
+  display: flex; /* <-- Key layout change */
+  justify-content: space-between; /* <-- Key layout change */
+  align-items: center; /* <-- Key layout change */
+  gap: 15px;
+  transition: box-shadow 0.2s;
+}
+
+li:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* This targets the main content wrapper (h3, p) */
+/* This assumes your HTML structure is <li><div><h3>..</h3><p>..</p></div> <div><button>..</button>...</div></li> */
+/* IF your structure is <li><div><h3>..</h3><p>..</p> <div><button>..</button></div></div></li>, use the rule below */
+li > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns text to the left */
+  gap: 5px;
+  flex-grow: 1; /* Allows text to take up available space */
+}
+
+li h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #222;
+}
+
+li p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Button group (for Edit/Delete) */
+/* This selector targets the <div> holding the buttons */
+li > div > div {
+  display: flex;
+  flex-direction: column; /* Ensure they stack vertically */
+  gap: 8px;
+  margin-top: 10px;
+  flex-shrink: 0;
+  align-items: center;   /* THIS CENTERS THEM HORIZONTALLY */
+  justify-content: center; /* THIS CENTERS THEM VERTICALLY IF THERE'S EXTRA SPACE */
+  width: 100%;           /* Ensure the container takes full width to allow centering */
+}
+/* Styling for Edit/Delete buttons */
+li > div > div button {
+  margin: 0;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background-color: #f0f0f0; /* Light grey */
+  color: #444;
+  border: 1px solid #ddd;
+  /* ... your existing button styles ... */
+  width: auto; /* Allow buttons to size based on content, or set a fixed width if desired */
+  min-width: 100px; /* Example: give buttons a minimum width */
+}
+
+
+li > div > div button:hover {
+  background-color: #e0e0e0;
+  border-color: #ccc;
+}
+
+/* Special style for the "Delete" button (assumes it's the last button) */
+li > div > div button:last-child {
+  background-color: transparent;
+  color: #e53e3e; /* Red */
+  border-color: #e53e3e;
+}
+
+li > div > div button:last-child:hover {
+  background-color: #fff0f0; /* Light red background on hover */
+}
